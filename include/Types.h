@@ -6,6 +6,7 @@
 
 typedef int ElemType;
 typedef int Int;
+typedef int Bool;
 
 #define TRUE        1
 #define FALSE       0

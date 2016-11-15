@@ -20,7 +20,7 @@
 #define MinAddressLength   0
 
 
-struct Tag_UserInfo {
+typedef struct Tag_UserInfo {
   // 姓名
   char name[MaxNameLength];
   // 电话
@@ -29,12 +29,21 @@ struct Tag_UserInfo {
   char address[MaxAddressLength];
   // 性别
   Int gender;
-};
-typedef struct Tag_UserInfo UserInfo;
+} UserInfo;
 
-Status initContactList();
-Status searchUser(char* name);
-Status addUser(UserInfo userInfo);
-Status deleteUser(UserInfo userInfo);
-Status destoryContactList();
+typedef struct Tag_ContactList {
+  UserInfo * pUserInfo;
+  struct Tag_ContactList * self;
+  // 总共长度
+  Int length;
+} ContactList;
+
+UserInfo createUser(char* name, char* mobile, char* address, Int gender);
+Status initContactList(ContactList ** pContactList, Int size);
+Status destoryContactList(ContactList * self);
+Int countContactList(ContactList * self);
+Bool isMax(ContactList * self);
+Status searchUser(ContactList * self, char* name);
+Status addUser(ContactList * self, UserInfo * pUserInfo);
+Status deleteUser(ContactList * self, ContactList userInfo);
 #endif
